@@ -3,55 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club Team Profiles</title>
+    <title>Student ID Card</title>
     <style>
-        /* This CSS ensures the iframe takes up the entire page seamlessly */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            background-color: #f4f4f9;
-        }
-        iframe {
-            width: 100%;
-            height: 100vh;
-            border: none;
-            display: block;
-        }
-        .error-message {
-            text-align: center;
-            font-family: sans-serif;
-            margin-top: 40px;
-            color: #333;
-        }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #f4f4f9; }
+        iframe { width: 100%; height: 100%; border: none; }
+        .error-msg { text-align: center; font-family: sans-serif; margin-top: 50px; color: #333; }
     </style>
 </head>
 <body>
+    <iframe id="profileIframe" src=""></iframe>
 
-    <!-- The iframe where the Google Apps Script UI will load -->
-    <!-- Give your iframe an ID so we can target it with JavaScript -->
-<iframe id="profileFrame" style="width: 100%; height: 100vh; border: none;"></iframe>
+    <script>
+        // REPLACE THIS URL with your newly deployed Apps Script Web App URL
+        const appsScriptUrl = "https://script.google.com/macros/s/AKfycbxFT1NN1yRJn0MQfKCeO-rGqnKvetLag71wgStZ0x935E5HsiovUlLymWJs6Lsw6vTU/exec";
 
-<script>
-  // 1. Paste your Google Apps Script Web App URL here
-  const baseScriptUrl = "https://script.google.com/macros/s/AKfycbwPf-57yPKggNAMOd2pmph4FM9zIiNW2QRZL0yViC1hxOZwQVHbZsiFW6TQzB7RJkk/exec";
+        // Extract 'id' from the GitHub Pages URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const studentId = urlParams.get('id');
 
-  // 2. Grab the ?id= parameter from the website URL (what the QR code generated)
-  const urlParams = new URLSearchParams(window.location.search);
-  const rollId = urlParams.get('id');
-
-  // 3. Inject the ID into the iframe's source link
-  const iframe = document.getElementById('profileFrame');
-  
-  if (rollId) {
-    // If an ID exists, pass it to the Google Script
-    iframe.src = baseScriptUrl + "?id=" + encodeURIComponent(rollId);
-  } else {
-    // If someone just visits the site without scanning a QR code
-    document.getElementById('profileFrame').outerHTML = "<h2>Please scan a valid member QR code.</h2>";
-  }
-</script>
+        if (studentId) {
+            // Append the ID and inject into the iframe
+            document.getElementById('profileIframe').src = appsScriptUrl + "?id=" + encodeURIComponent(studentId);
+        } else {
+            // Show error if someone visits the GitHub page without an ID
+            document.body.innerHTML = "<h2 class='error-msg'>Invalid QR Code: No ID provided.</h2>";
+        }
+    </script>
 </body>
 </html>
