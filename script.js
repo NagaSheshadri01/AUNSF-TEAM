@@ -1,34 +1,121 @@
-const params = new URLSearchParams(window.location.search);
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzs3m6E30LdPcHBTKfXZ_k3Xn87f0yb5Qo2vz9feX3Z4FxaCs3sf6uWuBdfjcjo_VRS/exec";
 
-const roll = params.get("roll");
 
-fetch("https://script.google.com/macros/s/AKfycbwhYmbeTIMsQ7g-MuQN-zGUGeVc6Ce6wiLruBcp-pBLkTy2B6-c9kPjNbdKI9vTM5I_/exec?roll=" + encodeURIComponent(roll))
-.then(r=>r.json())
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+
+const roll =
+params.get("roll");
+
+
+
+if(!roll){
+
+document.getElementById("name")
+.innerText =
+"No QR Data";
+
+}
+else{
+
+
+fetch(
+API_URL + "?roll=" + roll
+)
+
+.then(res=>res.json())
+
 .then(data=>{
 
-document.getElementById("photo").src=data.image;
 
-document.getElementById("name").innerText=data.name;
+if(data.error){
 
-document.getElementById("core").innerText=data.core;
+document.getElementById("name")
+.innerText =
+"Member Not Found";
 
-document.getElementById("dept").innerText=data.department;
+return;
 
-document.getElementById("linkedin").href=data.linkedin;
+}
 
-document.getElementById("instagram").href=data.instagram;
 
-document.getElementById("email").href="mailto:"+data.email;
 
-document.getElementById("email").innerText=data.email;
+document
+.getElementById("name")
+.innerText =
+data.name || "Unknown";
 
-document.getElementById("phone").href="tel:"+data.phone;
 
-document.getElementById("phone").innerText=data.phone;
+
+document
+.getElementById("core")
+.innerText =
+data.core || "";
+
+
+
+document
+.getElementById("dept")
+.innerText =
+data.department || "";
+
+
+
+document
+.getElementById("roll")
+.innerText =
+"Roll: " + data.roll;
+
+
+
+if(data.image){
+
+document
+.getElementById("profileImage")
+.src =
+data.image;
+
+}
+
+
+
+if(data.instagram){
+
+document
+.getElementById("instagram")
+.href =
+data.instagram;
+
+}
+
+
+if(data.linkedin){
+
+document
+.getElementById("linkedin")
+.href =
+data.linkedin;
+
+}
+
 
 })
-.catch(()=>{
 
-document.body.innerHTML="<h2 style='text-align:center'>Member Not Found</h2>";
+
+.catch(error=>{
+
+
+document
+.getElementById("name")
+.innerText =
+"Error loading profile";
+
 
 });
+
+}

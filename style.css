@@ -1,106 +1,100 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+body{
+
+margin:0;
+height:100vh;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-family:
+Arial, sans-serif;
+
+background:
+linear-gradient(
+135deg,
+#224534,
+#0f241b
+);
+
 }
 
-body{
-    background:#f4f6fb;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-}
 
 .card{
 
-    width:380px;
+width:350px;
 
-    background:white;
+padding:30px;
 
-    border-radius:20px;
+background:white;
 
-    padding:30px;
+border-radius:25px;
 
-    text-align:center;
+text-align:center;
 
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+box-shadow:
+0 20px 50px rgba(0,0,0,.3);
 
 }
+
+
 
 .profile{
 
-    width:180px;
+width:140px;
+height:140px;
 
-    height:180px;
+border-radius:50%;
 
-    border-radius:50%;
-
-    object-fit:cover;
-
-    margin-bottom:20px;
+object-fit:cover;
 
 }
+
+
 
 h1{
 
-    font-size:28px;
+margin-top:20px;
+
+color:#224534;
 
 }
 
-h2{
 
-    margin-top:10px;
 
-    color:#2457ff;
+p{
 
-    font-size:24px;
+color:#555;
 
 }
 
-h3{
 
-    margin-top:5px;
 
-    color:#555;
+.buttons{
 
-}
+display:flex;
 
-.batch{
+justify-content:center;
 
-    margin-top:20px;
+gap:15px;
 
-    color:#888;
+margin-top:25px;
 
 }
 
-.links{
 
-    margin-top:35px;
+.buttons a{
 
-    display:flex;
+padding:10px 18px;
 
-    flex-direction:column;
+background:#224534;
 
-    gap:18px;
+color:white;
 
-}
+border-radius:20px;
 
-.links a{
+text-decoration:none;
 
-    text-decoration:none;
-
-    color:#000;
-
-    font-size:18px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    border-bottom:1px solid #ddd;
-
-    padding-bottom:8px;
+font-size:14px;
 
 }
